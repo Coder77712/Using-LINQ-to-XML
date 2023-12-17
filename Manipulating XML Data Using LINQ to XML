@@ -1,0 +1,26 @@
+using System;
+using System.Xml.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        XDocument doc = new XDocument(
+            new XElement("Root",
+                new XElement("Child1", "Value1"),
+                new XElement("Child2", "Value2")
+            )
+        );
+
+        Console.WriteLine(doc);
+
+        // Querying XML elements
+        var result = doc.Descendants("Child1").FirstOrDefault();
+        if (result != null)
+        {
+            result.Value = "UpdatedValue";
+        }
+
+        Console.WriteLine(doc);
+    }
+}
