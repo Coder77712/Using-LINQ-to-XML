@@ -1,0 +1,25 @@
+using System.Linq;
+using System.Xml.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        // Load XML document from a file
+        XDocument doc = XDocument.Load("books.xml");
+
+        // LINQ query to retrieve book titles and authors
+        var books = from book in doc.Descendants("book")
+                    select new
+                    {
+                        Title = book.Element("title").Value,
+                        Author = book.Element("author").Value
+                    };
+
+        // Display book titles and authors
+        foreach (var book in books)
+        {
+            Console.WriteLine($"Title: {book.Title}, Author: {book.Author}");
+        }
+    }
+}
